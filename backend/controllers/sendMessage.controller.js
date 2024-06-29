@@ -1,10 +1,40 @@
-export const sendMessage =async(req,res)=>{
-    console.log("Message send",req.params.id);
+import Conversation from "../models/conversation.models.js";
+import Message from "../models/message.models.js"
+export const sendMessage = async (req, res) => {
+  try {
+    const { message } = req.body;
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id;
 
-    try{
+    let conversation = await Conversation.findOne({
+      participants: { $all: [senderId, receiverId] },
+    });
 
-    }catch(error){
-        console.log("Error in SendMessage controller",error.message)
-        res.status(500).json({message: "Internal Server Error"})
+    if (!conversation) {
+        conversation = await Conversation.create({
+        participants: [senderId, receiverId],
+      });
     }
-}
+
+    const newMessage = new Message({
+        senderId,
+        receiverId,
+        message,
+    })
+
+    if(newMessage){
+        conversation.message.push(newMessage._id)
+    }
+
+    // await conversation.save();
+    // await newMessage.save()
+
+    // this will run parallel
+    await Promise.all([conversation.save(),newMessage.save()])
+
+    res.status(201).json(newMessage)
+  } catch (error) {
+    console.log("Error in SendMessage controller", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
