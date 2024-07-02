@@ -1,7 +1,10 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="h-full p-6 w-full rounded-lg shadow-md bg-indigo-900  bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border border-gray-100">
@@ -34,12 +37,12 @@ const Login = () => {
             />
           </div>
 
-          <a
-            href="#"
+          <Link
+            to="/signup"
             className="text-sm text-gray-200 hover:underline hover:text-orange-400 mt-2 inline-block"
           >
             {"Don't have an account"}
-          </a>
+          </Link>
           <div>
             <button className="btn btn-block btn-sm mt-2">Login</button>
           </div>
