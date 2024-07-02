@@ -12,7 +12,7 @@ const Login = () => {
           Login <span className="text-orange-600">ChatApp</span>
         </h1>
         <form>
-          <div>
+          <div>git 
             <label className="label p-2">
               <span className="text-base label-text text-gray-200">
                 Username
