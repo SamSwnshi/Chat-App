@@ -1,42 +1,37 @@
 import  { useState } from "react";
 import toast from "react-hot-toast";
-import { userAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const useLogin = () => {
-  const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const { setAuth } = useAuthContext();
 
-  const {setAuth} = userAuthContext()
+	const login = async (username, password) => {
+		const success = handleInputError(username, password);
+		if (!success) return;
+		setLoading(true);
+		try {
+			const res = await fetch("/api/auth/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ username, password }),
+			});
 
-  const login = async (username, password) => {
-    const success = handleInputError(username,password);
+			const data = await res.json();
+			if (data.error) {
+				throw new Error(data.error);
+			}
 
-    if(!success){
-        return ;
-    }
+			localStorage.setItem("chat-user", JSON.stringify(data));
+			setAuth(data);
+		} catch (error) {
+			toast.error(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
 
-    setLoading(true)
-    try {
-        const res = await fetch("/api/auth/login",{
-            method: "POST",
-            headers:{"Content-Type": "application/json"},
-            body: JSON.stringify({username,password})
-        })
-
-        const data = await res.json()
-
-        if(data.error){
-            throw new Error(data.message)
-        }
-
-        localStorage.setItem("chat-user",JSON.stringify(data))
-        setAuth(data)
-    } catch (error) {
-        toast.error(error.message)
-    }finally{
-        setLoading(false)
-    }
-  };
-  return { loading, login };
+	return { loading, login };
 };
 
 export default useLogin;

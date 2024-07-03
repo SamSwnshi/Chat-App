@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { userAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 
 const useLogout = () => {
   const [loading, setLoading] = useState(false);
-    const {setAuth} = userAuthContext();
+    const {setAuth} = useAuthContext();
   const logout = async () => {
     try {
       const res = await fetch("/api/auth/logout", {

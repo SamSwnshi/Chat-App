@@ -1,20 +1,30 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect } from "react";
 import Message from "./Message";
 import MessageInput from "./MessageInput";
 import { TiMessages } from "react-icons/ti";
+import useConversation from "../../store/useConversation";
 
 const MessageContainer = () => {
-  const noChatSelected = true;
+  const { selectedConversation, setSelectedConversation } = useConversation();
+
+  useEffect(() => {
+    //cleanup function
+    return () => {
+      setSelectedConversation(null);
+    };
+  }, [setSelectedConversation]);
   return (
     <div className="md:min-w-[450px] flex flex-col">
-      {noChatSelected ? (
+      {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
           <div className="bg-slate-500 px-4 py-2 mb-2">
             <span className="label-text">To:</span>{" "}
-            <span className="text-gray-100 font-bold">Sameer</span>
+            <span className="text-gray-100 font-bold">
+              {selectedConversation.fullname}
+            </span>
           </div>
 
           <Message />

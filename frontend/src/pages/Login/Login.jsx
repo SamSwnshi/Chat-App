@@ -20,7 +20,7 @@ const Login = () => {
         </h1>
         <form onSubmit={handleSubmit}>
           <div>
-            git
+            
             <label className="label p-2">
               <span className="text-base label-text text-gray-200">
                 Username
