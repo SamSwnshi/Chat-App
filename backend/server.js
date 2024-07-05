@@ -5,8 +5,7 @@ import authRoutes from "./routes/auth.routes.js"
 import messageRoutes from "./routes/message.routes.js"
 import userRoutes from "./routes/user.routes.js"
 import cookieParser from "cookie-parser";
-
-const app = express();
+import {app,server} from "./socket/socket.js"
 
 const port = process.env.PORT || 8000;
 
@@ -19,7 +18,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(port, () => {
+server.listen(port, () => {
     connectDB()
   console.log(`Server is running on port ${port}`);
 });
