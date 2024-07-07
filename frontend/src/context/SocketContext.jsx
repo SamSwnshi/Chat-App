@@ -16,7 +16,7 @@ export const SocketContextProvider = ({ children }) => {
   useEffect(() => {
     if (auth) {
       //NOTE - here we connect the backend to frontend !
-      const socket = io("http://localhost:5000", {
+      const socket = io("https://chat-app-if2l.onrender.com", {
         query: {
           userId: auth._id,
         },
