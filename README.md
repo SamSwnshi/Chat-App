@@ -55,8 +55,86 @@ Chat App is a real-time messaging application built with a focus on efficiency, 
 
 ### Backend
 
+```
+backend/ 
+├── server.js # Entry point for the backend server 
+├── controllers/  # Logic for handling API endpoints 
+│ ├── auth.controller.js 
+│ ├── sendMessage.controller.js 
+│ └── user.controller.js 
+├── db/ 
+│ └── config.js # MongoDB configuration 
+├── middleware/ 
+│ └── protectRouter.middleware.js # Middleware for route protection 
+├── models/ # Mongoose models 
+│ ├── conversation.models.js 
+│ ├── message.models.js 
+│ └── user.model.js 
+├── routes/ # API routes 
+│ ├── auth.routes.js 
+│ ├── message.routes.js 
+│ └── user.routes.js 
+├── socket/ 
+│ └── socket.js # Socket.IO logic for real-time messaging 
+└── utils/ 
+└── generateJwttoken.js # Utility for JWT generation
+```
 
----
+### Frontend
+
+```
+frontend/ 
+├── README.md # Documentation for the frontend 
+├── index.html # Main HTML file 
+├── package.json 
+├── vite.config.js # Vite configuration file 
+├── tailwind.config.js # Tailwind CSS configuration 
+├── src/ # React source code 
+│ ├── App.jsx # Main application component 
+│ ├── main.jsx # React entry point 
+│ ├── context/ # Context API for state management 
+│ │ ├── AuthContext.jsx 
+│ │ └── SocketContext.jsx 
+│ ├── hooks/ # Custom hooks 
+│ │ ├── useGetConversations.js 
+│ │ ├── useListenMessage.js 
+│ │ ├── useLogin.js 
+│ │ ├── useLogout.js 
+│ │ ├── useMessage.js 
+│ │ ├── useSendMessage.js 
+│ │ └── useSignup.js 
+│ ├── pages/ # Page components 
+│ │ ├── Conversation/ 
+│ │ │ ├── Conversation.jsx 
+│ │ │ └── SideConversation.jsx 
+│ │ ├── Home/ 
+│ │ │ └── Home.jsx 
+│ │ ├── Login/ 
+│ │ │ └── Login.jsx 
+│ │ ├── Logout/ 
+│ │ │ └── Logout.jsx 
+│ │ ├── MessageContainer/ 
+│ │ │ ├── Message.jsx 
+│ │ │ ├── MessageContainer.jsx 
+│ │ │ ├── MessageInput.jsx 
+│ │ │ └── MessageInside.jsx 
+│ │ ├── SearchInput/ 
+│ │ │ └── SearchInput.jsx 
+│ │ ├── Sidebar/ 
+│ │ │ └── Sidebar.jsx 
+│ │ ├── SignUp/ 
+│ │ │ ├── Gender.jsx 
+│ │ │ └── Signup.jsx 
+│ │ └── Skeletons/ 
+│ │ └── MessageSkeletons.jsx 
+│ ├── store/ # State management hooks 
+│ │ └── useConversation.js 
+│ └── utils/ # Utility functions 
+│ ├── emojis.js 
+│ └── extractTime.js
+```
+
+
 
 ## Installation
 
